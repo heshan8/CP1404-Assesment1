@@ -3,18 +3,38 @@ CP1404 Assignment -1-
 Reading list by Tharindu Heshan
 Add github link
 """
-main_menu = "\nMain Menu:\n R - Show list of required books\n C - Show list of completed books\n" \
+MAIN_MENU = "\nMain menu:\n R - Show list of required books\n C - Show list of completed books\n" \
             " A - Add a new book\n M - Mark a book as completed\n Q - Quit"
 
 import csv
 
 def main():
-    with open('books.csv', 'r') as f:
-        edit = csv.reader(f)
+    with open('books.csv', 'r') as c:
+        edit = csv.reader(c)
         reading_list = list(edit)
-        reading_list.sort()
     print("Reading List 1.0 - by Tharindu Heshan")
-    print(main_menu)
+    print(MAIN_MENU)
+    menu_choice = input("Enter choice: ").upper()
+    while menu_choice != "Q":
+        if menu_choice == "R":
+            print("N")
+        elif menu_choice == "C":
+            print("p")
+        elif menu_choice == "A":
+            print("p")
+        elif menu_choice == "M":
+            print("p")
+        else:
+            print("Invalid input, Try again.")
+        print(MAIN_MENU)
+        menu_choice = input("Enter choice: ").upper()
+    with open("books.csv", "a", newline='') as c:
+        edit = csv.writer(c)
+        edit.writerows(reading_list)
+    print("Have a nice day :)")
+
+
+
 
 main()
 #     choice = True
