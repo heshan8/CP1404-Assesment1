@@ -20,9 +20,9 @@ def main():
         if menu_choice == "R":
             show_list(reading_list, menu_choice.lower())
         elif menu_choice == "C":
-            print("p")
+            show_list(reading_list, menu_choice.lower())
         elif menu_choice == "A":
-            print(add_book(reading_list, menu_choice.lower))
+            add_book(reading_list)
         elif menu_choice == "M":
             show_list(reading_list, menu_choice.lower())
             mark_book(reading_list)
@@ -42,7 +42,7 @@ def show_list(reading_list, book):
     if book == "r":
         print("List of required books:")
     elif book == "c":
-        print("List of completed books")
+        print("List of completed books:")
     elif book == "m":
         book = "r"
     count = 0
@@ -84,45 +84,25 @@ def mark_book(reading_list):
             print("Invalid book number, try again")
 
 def add_book(reading_list):
-    book_list = []
-    book_name = str(input("Enter the name of the book you want to add: "))
-    while not book_name.isalnum():
-        print("Cannot leave input as blank")
-        book_name = str(input("Please enter the name of the book: "))
-    book_list.append(book_name)
-    valid_book = False
-    while not valid_book:
-        author = (input("Enter writer of the book: "))
-        string = check_string(author)
-        if not string:
-            print("Invalid name, Please enter a valid name")
+        book_list = []
+        book_name = str(input("Enter the name of the book you want to add: "))
+        while not book_name:
+            print("Input Cannot be blank")
+            book_name = str(input("Enter the name of the book you want to add: "))
+        book_list.append(book_name)
+        author = (input("Enter the writer of the book: "))
+        while not author:
+            print("Input Cannot be blank")
+            author = (input("Enter the writer of the book: "))
+        book_list.append(author)
+        pages = int(input("Enter the number of pages in the book: "))
+        if pages < 1:
+            print("Number of pages must be higher than 1")
+            pages = (input("Enter the number of pages in the book: "))
         else:
-            string = True
-    book_list.append(author)
-
-
-def check_string(author):
-    try:
-        str(author)
-        return True
-    except ValueError:
-        return False
-
-
-
-
+            book_list.append(pages)
+        reading_list.append(book_list)
+        print("{} By {} ({} Pages) added to reading list".format(book_name, author, pages))
 
 main()
-
-#     else:
-#         input("Input Error! Enter any key to try again.")
-#
-#
-# print("Program exiting")
-#
-# def required_items():
-#done
-
-
-
 
