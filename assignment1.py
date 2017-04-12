@@ -18,13 +18,14 @@ def main():
     menu_choice = input("Enter choice: ").upper()
     while menu_choice != "Q":
         if menu_choice == "R":
-            print("N")
+            show_list(reading_list, menu_choice.lower())
         elif menu_choice == "C":
             print("p")
         elif menu_choice == "A":
-            print("p")
+            print(add_book(reading_list, menu_choice.lower))
         elif menu_choice == "M":
-            print("p")
+            show_list(reading_list, menu_choice.lower())
+            mark_book(reading_list)
         else:
             print("Invalid input, Try again.")
         print(MAIN_MENU)
@@ -37,52 +38,82 @@ def main():
         exit
 
 
-def show_list(reading_list, books):
-    if books == "r":
+def show_list(reading_list, book):
+    if book == "r":
         print("List of required books:")
-    elif books == "c":
+    elif book == "c":
         print("List of completed books")
-    elif books == "m":
-        books = "r"
+    elif book == "m":
+        book = "r"
     count = 0
     total = 0
-    for item in reading_list:
-        if books in item[3]:
-            print("{}. {:20}   $ {:10} ({})".format(count, item[0], item[1], item[2], item[3]))
+    for items in reading_list:
+        if book in items[3]:
+            print("{}. {:34} By: {:13}  Pages:({})".format(count, items[0], items[1], items[2], items[3]))
             count += 1
-            total += float(item[1])
+            total += int(items[2])
 
     if count == 0:
-        if books == "r":
+        if items == "r":
             print("No required books to display")
-        elif books == "c":
+        elif items == "c":
             print("No completed items to display")
         else:
             print("No items exist in the list")
     else:
-        print("Total expected price for {} items: ${}".format(count, total))
+        print("Total pages for {} books: {}".format(count, total))
+
+def mark_book(reading_list):
+    valid_booknumber = False
+    while not valid_booknumber:
+        book_number = int(input("Enter the valid number of the book to mark as completed: "))
+        count = -1
+        for book in reading_list:
+            if book[3] == "r":
+                count += 1
+                if count == book_number:
+                    book[3] = "c"
+                    print(book[0], "is marked as completed" )
+                    valid_booknumber = True
+                    break
+            elif count == book_number:
+                print("Warning, the book was not marked")
+                valid_booknumber = True
+                break
+        if not valid_booknumber:
+            print("Invalid book number, try again")
+
+def add_book(reading_list):
+    book_list = []
+    book_name = str(input("Enter the name of the book you want to add: "))
+    while not book_name.isalnum():
+        print("Cannot leave input as blank")
+        book_name = str(input("Please enter the name of the book: "))
+    book_list.append(book_name)
+    valid_book = False
+    while not valid_book:
+        author = (input("Enter writer of the book: "))
+        string = check_string(author)
+        if not string:
+            print("Invalid name, Please enter a valid name")
+        else:
+            string = True
+    book_list.append(author)
+
+
+def check_string(author):
+    try:
+        str(author)
+        return True
+    except ValueError:
+        return False
+
 
 
 
 
 main()
-#     choice = True
-#     (main_menu)
-#     choice = str(input())
-#     menu_choice = str(input())
-#     if menu_choice.lower() == 'r':
-#         print("Required Books:")
-#         required_items()
-#     elif menu_choice.lower() == 'c':
-#         print("Completed Items:")
-#         list_items_completed()
-#     elif menu_choice.lower() == 'm':
-#         list_items_required()
-#         mark_item_completed()
-#     elif menu_choice.lower() == 'a':
-#         add_item()
-#     elif menu_choice.lower() == 'q':
-#         loop = False
+
 #     else:
 #         input("Input Error! Enter any key to try again.")
 #
