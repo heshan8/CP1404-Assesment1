@@ -1,17 +1,21 @@
 """
 CP1404 Assignment -1-
+13/4/2017
 Reading list by Tharindu Heshan
 Add github link
 """
-MAIN_MENU = "\nMain menu:\n R - Show list of required books\n C - Show list of completed books\n" \
-            " A - Add a new book\n M - Mark a book as completed\n Q - Quit"
+
+
 
 import csv
 
+MAIN_MENU = "\nMain menu:\n R - Show list of required books\n C - Show list of completed books\n" \
+            " A - Add a new book\n M - Mark a book as completed\n Q - Quit" """ efswfsef sdefsd"""
+
 def main():
-    with open('books.csv', 'r') as c:
-        edit = csv.reader(c)
-        reading_list = list(edit)
+    with open('books.csv', 'r') as f:
+        writer = csv.reader(f)
+        reading_list = list(writer)
         reading_list.sort()
     print("Reading List 1.0 - by Tharindu Heshan")
     print(MAIN_MENU)
@@ -30,14 +34,30 @@ def main():
             print("Invalid input, Try again.")
         print(MAIN_MENU)
         menu_choice = input("Enter choice: ").upper()
-    with open("books.csv", "w", newline='') as c:
-        edit = csv.writer(c)
-        edit.writerows(reading_list)
+    with open("books.csv", "w", newline='') as f:
+        writer = csv.writer(f)
+        writer.writerows(reading_list)
     if menu_choice == "Q":
         print("Have a nice day :)")
-        exit
 
 
+#  pseudocode:
+#     function show_list()
+#     if book == "r":
+#         print "List of required books"
+#     elif book == "c"
+#         print "List of completed books"
+#     elif book == "m"
+#     calculate total number of pages
+# if count == 0:
+#     if book == "r"
+#      print "no required books to display"
+#     elif book == "c"
+#         print "no completed books to display"
+#     elif:
+#         print"no books exist"
+#     else:
+#         display list of completed or required books
 def show_list(reading_list, book):
     if book == "r":
         print("List of required books:")
@@ -62,6 +82,7 @@ def show_list(reading_list, book):
             print("No items exist in the list")
     else:
         print("Total pages for {} books: {}".format(count, total))
+        
 
 def mark_book(reading_list):
     valid_booknumber = False
@@ -73,7 +94,7 @@ def mark_book(reading_list):
                 count += 1
                 if count == book_number:
                     book[3] = "c"
-                    print(book[0], "is marked as completed" )
+                    print(book[0], "is now marked as completed" )
                     valid_booknumber = True
                     break
             elif count == book_number:
@@ -83,6 +104,15 @@ def mark_book(reading_list):
         if not valid_booknumber:
             print("Invalid book number, try again")
 
+# pseudocode:
+#   book_list = []
+#        get name of book
+#        add to book_list
+#        get author
+#        add to book_list
+#        get number of pages
+#        add to book_list
+#        append new list to reading_list
 def add_book(reading_list):
         book_list = []
         book_name = str(input("Enter the name of the book you want to add: "))
