@@ -1,5 +1,5 @@
 """
-CP1404 Assignment -1-
+CP1404 Assignment 1
 13/4/2017
 Reading list by Tharindu Heshan
 https://github.com/heshan8/CP1404-Assesment1
