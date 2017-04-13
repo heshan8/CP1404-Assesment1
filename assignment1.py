@@ -2,7 +2,7 @@
 CP1404 Assignment -1-
 13/4/2017
 Reading list by Tharindu Heshan
-Add github link
+https://github.com/heshan8/CP1404-Assesment1
 """
 
 
@@ -82,7 +82,7 @@ def show_list(reading_list, book):
             print("No items exist in the list")
     else:
         print("Total pages for {} books: {}".format(count, total))
-        
+
 
 def mark_book(reading_list):
     valid_booknumber = False
